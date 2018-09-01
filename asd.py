@@ -5,6 +5,7 @@ import urllib
 import ssl
 import webbrowser
 import os
+import time
 
 from twisted.internet import reactor
 from twisted.python import log
@@ -42,12 +43,14 @@ def openSearcher(frage,antwort1,antwort2,antwort3):
         responseHigh = responseHigh.replace(wort,'<mark>'+wort+'</mark>')
     for wort in antwort3.split():
         responseHigh = responseHigh.replace(wort,'<mark>'+wort+'</mark>')
-    file = open('high.html','w')
+    file = open('high.html','w', encoding="utf8")
     file.write(responseHigh)
     file.close()    
     urlFIle = 'file://' + os.path.realpath('high.html')
-    webbrowser.get(using='google-chrome').open(urlFIle,new=new)
-    
+    if os.name == 'nt':
+        webbrowser.get(using='windows-default').open(urlFIle,new=new)
+    else:
+        webbrowser.get(using='google-chrome').open(urlFIle,new=new)
 
 
 class EchoClientProtocol(WebSocketClientProtocol):
@@ -73,27 +76,88 @@ class EchoClientProtocol(WebSocketClientProtocol):
         self.sendCode('3b01') #GET links für streams
         self.sendCode('5d010801') #GET links für streams
 
+    def popAndCompare(self, a, b):
+        compareBytes = bytearray(binascii.unhexlify(b))
+        result = True
+        for cb in compareBytes:
+            if a[0] == cb:
+                del a[0]
+            else:
+                result = False
+        return result
+
+    def pop(self, a, size):
+        result = bytearray()
+        for index in range(0,size):
+            result.append(a[0])
+            del a[0]
+        return result
+
+    def parseQuest(self, payload):
+        pl = bytearray(payload)
+        if not self.popAndCompare(self,pl,'3D01'):
+            print("not a question")
+            print(payload)
+            exit()
+        questNR = 0
+        if self.popAndCompare(self,pl,'08'):
+            questNR = self.pop(self,pl,1)[0]
+        else:
+            questNR = 12
+        if self.popAndCompare(self,pl,'10'):
+            print(pl)
+            self.pop(self,pl,5)
+        else:
+            print("sth weird 1")
+            print(pl)
+        if self.popAndCompare(self,pl,'2c'):
+            self.pop(self,pl,2)
+        else:
+            print("sth weird 2")
+            print(pl)
+        if self.popAndCompare(self,pl,'08'):
+            self.pop(self,pl,2)
+        else:
+            print("sth weird 3")
+            print(pl)
+        if self.popAndCompare(self,pl,'12'):
+            questLen = self.pop(self,pl,1)[0]
+            quest = self.pop(self,pl,questLen).decode(encoding="utf-8")
+        else:
+            print("sth weird 4")
+            print(payload)
+        if self.popAndCompare(self,pl,'1a'):
+            ans1Len = self.pop(self,pl,1)[0]
+            ans1 = self.pop(self,pl,ans1Len).decode(encoding="utf-8")
+        else:
+            print("sth weird 5")
+            print(payload)
+        if self.popAndCompare(self,pl,'1a'):
+            ans2Len = self.pop(self,pl,1)[0]
+            ans2 = self.pop(self,pl,ans2Len).decode(encoding="utf-8")
+        else:
+            print("sth weird 6")
+            print(payload)
+        if self.popAndCompare(self,pl,'1a'):
+            ans3Len = self.pop(self,pl,1)[0]
+            ans3 = self.pop(self,pl,ans3Len).decode(encoding="utf-8")
+        else:
+            print("sth weird 7")
+            print(payload)
+        openSearcher(quest,ans1,ans2,ans3)
+
     def onMessage(self, payload, isBinary):
+        print(payload)
         if payload[0] is 61: # erhalten: Frage
-            print(payload)
-            offset = payload[9] - 216
-            questLen = payload[offset+15]
-            quest = payload[offset+16:offset+16+questLen].decode("utf-8")
-            ans1Len = payload[offset+17+questLen]
-            ans1 = payload[offset+18+questLen:offset+18+questLen+ans1Len].decode("utf-8")
-            ans2Len = payload[offset+19+questLen+ans1Len]
-            ans2 = payload[offset+20+questLen+ans1Len:offset+20+questLen+ans1Len+ans2Len].decode("utf-8")
-            ans3Len = payload[offset+21+questLen+ans1Len+ans2Len]
-            ans3 = payload[offset+22+questLen+ans1Len+ans2Len:offset+22+questLen+ans1Len+ans2Len+ans3Len].decode("utf-8")
-            openSearcher(quest,ans1,ans2,ans3)
-            print(payload)
+            self.parseQuest(self,payload)            
 
         if (payload[0] is 94) and (len(payload) > 3): #erhalten: Keep Alive Packet
             print("send keep alive:")
             newKAPacket = (int.from_bytes(b'\x5d\x01\x08\x00','big')+payload[3]+1).to_bytes(4,byteorder ='big')
             print(newKAPacket)
+            time.sleep(3)
             self.sendCode(binascii.hexlify(newKAPacket))
-        print(payload)
+
         if not isBinary:
             print("Text message received: {}".format(payload))
         #reactor.callLater(1, self.react)
