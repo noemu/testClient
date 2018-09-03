@@ -95,52 +95,52 @@ class EchoClientProtocol(WebSocketClientProtocol):
 
     def parseQuest(self, payload):
         pl = bytearray(payload)
-        if not self.popAndCompare(self,pl,'3D01'):
+        if not self.popAndCompare(payload,'3D01'):
             print("not a question")
             print(payload)
             exit()
         questNR = 0
-        if self.popAndCompare(self,pl,'08'):
-            questNR = self.pop(self,pl,1)[0]
+        if self.popAndCompare(pl,'08'):
+            questNR = self.pop(pl,1)[0]
         else:
             questNR = 12
-        if self.popAndCompare(self,pl,'10'):
+        if self.popAndCompare(pl,'10'):
             print(pl)
-            self.pop(self,pl,5)
+            self.pop(pl,5)
         else:
             print("sth weird 1")
             print(pl)
-        if self.popAndCompare(self,pl,'2c'):
-            self.pop(self,pl,2)
+        if self.popAndCompare(pl,'2c'):
+            self.pop(pl,2)
         else:
             print("sth weird 2")
             print(pl)
-        if self.popAndCompare(self,pl,'08'):
-            self.pop(self,pl,2)
+        if self.popAndCompare(pl,'08'):
+            self.pop(pl,2)
         else:
             print("sth weird 3")
             print(pl)
-        if self.popAndCompare(self,pl,'12'):
-            questLen = self.pop(self,pl,1)[0]
-            quest = self.pop(self,pl,questLen).decode(encoding="utf-8")
+        if self.popAndCompare(pl,'12'):
+            questLen = self.pop(pl,1)[0]
+            quest = self.pop(pl,questLen).decode(encoding="utf-8")
         else:
             print("sth weird 4")
             print(payload)
-        if self.popAndCompare(self,pl,'1a'):
-            ans1Len = self.pop(self,pl,1)[0]
-            ans1 = self.pop(self,pl,ans1Len).decode(encoding="utf-8")
+        if self.popAndCompare(pl,'1a'):
+            ans1Len = self.pop(pl,1)[0]
+            ans1 = self.pop(pl,ans1Len).decode(encoding="utf-8")
         else:
             print("sth weird 5")
             print(payload)
-        if self.popAndCompare(self,pl,'1a'):
-            ans2Len = self.pop(self,pl,1)[0]
-            ans2 = self.pop(self,pl,ans2Len).decode(encoding="utf-8")
+        if self.popAndCompare(pl,'1a'):
+            ans2Len = self.pop(pl,1)[0]
+            ans2 = self.pop(pl,ans2Len).decode(encoding="utf-8")
         else:
             print("sth weird 6")
             print(payload)
-        if self.popAndCompare(self,pl,'1a'):
-            ans3Len = self.pop(self,pl,1)[0]
-            ans3 = self.pop(self,pl,ans3Len).decode(encoding="utf-8")
+        if self.popAndCompare(pl,'1a'):
+            ans3Len = self.pop(pl,1)[0]
+            ans3 = self.pop(pl,ans3Len).decode(encoding="utf-8")
         else:
             print("sth weird 7")
             print(payload)
@@ -149,7 +149,7 @@ class EchoClientProtocol(WebSocketClientProtocol):
     def onMessage(self, payload, isBinary):
         print(payload)
         if payload[0] is 61: # erhalten: Frage
-            self.parseQuest(self,payload)            
+            self.parseQuest(payload)            
 
         if (payload[0] is 94) and (len(payload) > 3): #erhalten: Keep Alive Packet
             print("send keep alive:")
