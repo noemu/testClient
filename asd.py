@@ -16,7 +16,7 @@ from autobahn.twisted.websocket import WebSocketClientFactory, \
 
 def openSearcher(frage,antwort1,antwort2,antwort3):
     new=2
-    webbrowser.get(using='google-chrome').open("https://www.google.de/search?q=" +urllib.parse.quote_plus(frage+" "+antwort1+" "+antwort2+" "+antwort3),new=new)
+    webbrowser.get(using='google-chrome').open("https://www.google.de/search?q=" +urllib.parse.quote_plus(frage+" AND ("+antwort1+" OR "+antwort2+" OR "+antwort3+")"),new=new)
     #webbrowser.get(using='google-chrome').open("https://www.google.de/search?q=" +urllib.parse.quote_plus(antwort1),new=new)
     #webbrowser.get(using='google-chrome').open("https://www.google.de/search?q=" +urllib.parse.quote_plus(antwort2),new=new)
     #webbrowser.get(using='google-chrome').open("https://www.google.de/search?q=" +urllib.parse.quote_plus(antwort3),new=new)
@@ -47,10 +47,10 @@ def openSearcher(frage,antwort1,antwort2,antwort3):
     file.write(responseHigh)
     file.close()    
     urlFIle = 'file://' + os.path.realpath('high.html')
-    if os.name == 'nt':
-        webbrowser.get(using='windows-default').open(urlFIle,new=new)
-    else:
-        webbrowser.get(using='google-chrome').open(urlFIle,new=new)
+    #if os.name == 'nt':
+        #webbrowser.get(using='windows-default').open(urlFIle,new=new)
+    #else:
+        #webbrowser.get(using='google-chrome').open(urlFIle,new=new)
 
 
 class EchoClientProtocol(WebSocketClientProtocol):
@@ -175,7 +175,12 @@ if __name__ == '__main__':
     headers = {'Origin': 'http://live-de-prod-eb.tuanguwen.com:80','Sec-WebSocket-Protocol':'default-protocol','Sec-WebSocket-Extensions':''}
 
     factory = WebSocketClientFactory('ws://live-de-prod-eb.tuanguwen.com:80', headers=headers)
+
     factory.protocol = EchoClientProtocol
+
+    amd = EchoClientProtocol()
+    amd.onMessage(binascii.unhexlify('3d01080a10b8aec1a0da2c1a8d01088d321249556e7465722077656c6368657220506c617474656e6669726d612077757264652064617320416c62756d2022507572706c65205261696e2220766572c3b66666656e746c696368743f1a10436f6c756d626961205265636f7264731a145761726e65722042726f732e205265636f7264731a15556e6976657273616c204d757369632047726f757028b0ea0130b4f34c38f8ecc1a0da2c'),True)
+    exit()  
     connectWS(factory)
 
     reactor.run()
