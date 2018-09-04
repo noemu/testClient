@@ -16,7 +16,7 @@ from autobahn.twisted.websocket import WebSocketClientFactory, \
 
 def openSearcher(frage,antwort1,antwort2,antwort3):
     new=2
-    #webbrowser.get(using='google-chrome').open("https://www.google.de/search?q=" +urllib.parse.quote_plus(frage),new=new)
+    webbrowser.get(using='google-chrome').open("https://www.google.de/search?q=" +urllib.parse.quote_plus(frage+" "+antwort1+" "+antwort2+" "+antwort3),new=new)
     #webbrowser.get(using='google-chrome').open("https://www.google.de/search?q=" +urllib.parse.quote_plus(antwort1),new=new)
     #webbrowser.get(using='google-chrome').open("https://www.google.de/search?q=" +urllib.parse.quote_plus(antwort2),new=new)
     #webbrowser.get(using='google-chrome').open("https://www.google.de/search?q=" +urllib.parse.quote_plus(antwort3),new=new)
@@ -35,8 +35,8 @@ def openSearcher(frage,antwort1,antwort2,antwort3):
     req = urllib.request.Request(url,None,hdr)
     response = urllib.request.urlopen(req,context=ctx).read().decode('utf-8')
     responseHigh = response
-    for wort in frage.split():
-        responseHigh = responseHigh.replace(wort,'<mark>'+wort+'</mark>')
+    #for wort in frage.split():
+        #responseHigh = responseHigh.replace(wort,'<mark>'+wort+'</mark>')
     for wort in antwort1.split():
         responseHigh = responseHigh.replace(wort,'<mark>'+wort+'</mark>')
     for wort in antwort2.split():
@@ -78,6 +78,7 @@ class EchoClientProtocol(WebSocketClientProtocol):
 
     def popAndCompare(self, a, b):
         compareBytes = bytearray(binascii.unhexlify(b))
+        #a = bytearray(pl)
         result = True
         for cb in compareBytes:
             if a[0] == cb:
@@ -95,7 +96,7 @@ class EchoClientProtocol(WebSocketClientProtocol):
 
     def parseQuest(self, payload):
         pl = bytearray(payload)
-        if not self.popAndCompare(payload,'3D01'):
+        if not self.popAndCompare(pl,'3D01'):
             print("not a question")
             print(payload)
             exit()
@@ -115,6 +116,7 @@ class EchoClientProtocol(WebSocketClientProtocol):
         else:
             print("sth weird 2")
             print(pl)
+        self.popAndCompare(pl,'01')
         if self.popAndCompare(pl,'08'):
             self.pop(pl,2)
         else:
