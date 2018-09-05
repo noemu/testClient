@@ -6,6 +6,7 @@ import ssl
 import webbrowser
 import os
 import time
+import logging
 
 from twisted.internet import reactor
 from twisted.python import log
@@ -16,8 +17,9 @@ from autobahn.twisted.websocket import WebSocketClientFactory, \
     connectWS
 
 fh = logging.FileHandler('testClient.log')
-fh.setLevel(logging.DEBUG)
+fh.setLevel(logging.INFO)
 logger = logging.getLogger('testClient')
+logger.setLevel(logging.INFO)
 logger.addHandler(fh)
 
 def openSearcher(frage,antwort1,antwort2,antwort3):
@@ -70,7 +72,7 @@ class EchoClientProtocol(WebSocketClientProtocol):
         logger.info(response)
 
     def sendCode(self,code):
-        logger.info("--------sendCOde--------------------")
+        logger.info("--------sendCode--------------------")
         logger.info(code)
         bin =  binascii.unhexlify(code)
         self.sendMessage(bin,isBinary = True)
@@ -82,7 +84,7 @@ class EchoClientProtocol(WebSocketClientProtocol):
         self.sendMessage(bin,isBinary = True)
 
     def onOpen(self):
-        self.sendHello()
+        self.sendCode('0300080d1210346433663337393432666533643439381a0974384e717a2d766e67222036616265393536613431383430666330666465653665376563646364663839313a980166516a7a373948316454633a4150413931624630307642713644645451334f65634b70695a4d79546d523038647475496564396634636771346f6c2d304b50776b5a516752615a72566270716d664d45634f6f36355256746f47485547616f5157685373526e36346e79395039486e34682d6e4c45484633386c584e4a5233545971316146594b54487a43714a4f325f4e563357386832434a07616e64726f69646a04312e32307206322e31332e307800')
         self.sendCode('6c01') #GET neue Cash Termine
         self.sendCode('6c01') #GET neue Cash Termine
         self.sendCode('3b01') #GET links für streams
@@ -174,9 +176,11 @@ class EchoClientProtocol(WebSocketClientProtocol):
         logger.info("---------Package received-----------")
         logger.info(binascii.hexlify(payload))
         if payload[0] is 61: # erhalten: Frage
+            logger.info("----Frage erhalten----")
             self.parseQuest(payload)            
 
         if (payload[0] is 94) and (len(payload) > 3): #erhalten: Keep Alive Packet
+            logger.info("---sende Keep Alive-----")
             #print("send keep alive:")
             newKAPacket = (int.from_bytes(b'\x5d\x01\x08\x00','big')+payload[3]+1).to_bytes(4,byteorder ='big')
             #print(newKAPacket)
@@ -206,7 +210,8 @@ if __name__ == '__main__':
     #openSearcher("was ist der zweit höchster berg der welt","k2","himalja","rocky mauntains")
     #exit()
 
-    log.startLogging(sys.stdout)
+    #log.startLogging(sys.stdout)
+    logger.info("---------start session----------")
 
     headers = {'Origin': 'http://live-de-prod-eb.tuanguwen.com:80','Sec-WebSocket-Protocol':'default-protocol','Sec-WebSocket-Extensions':''}
 
