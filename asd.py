@@ -15,6 +15,11 @@ from autobahn.twisted.websocket import WebSocketClientFactory, \
     WebSocketClientProtocol, \
     connectWS
 
+fh = logging.FileHandler('testClient.log')
+fh.setLevel(logging.DEBUG)
+logger = logging.getLogger('testClient')
+logger.addHandler(fh)
+
 def openSearcher(frage,antwort1,antwort2,antwort3):
     new=2
     if os.name == 'nt':
@@ -36,7 +41,7 @@ def openSearcher(frage,antwort1,antwort2,antwort3):
        'Accept-Encoding': 'none',
        'Accept-Language': 'en-US,en;q=0.8',
        'Connection': 'keep-alive'}
-    print(url)
+    #print(url)
     req = urllib.request.Request(url,None,hdr)
     response = urllib.request.urlopen(req,context=ctx).read().decode('utf-8')
     responseHigh = response
@@ -61,9 +66,12 @@ def openSearcher(frage,antwort1,antwort2,antwort3):
 class EchoClientProtocol(WebSocketClientProtocol):
 
     def onConnect(self, response):
-        print(response)
+        logger.info("--------onConnect:Response----------")
+        logger.info(response)
 
     def sendCode(self,code):
+        logger.info("--------sendCOde--------------------")
+        logger.info(code)
         bin =  binascii.unhexlify(code)
         self.sendMessage(bin,isBinary = True)
 
@@ -74,12 +82,11 @@ class EchoClientProtocol(WebSocketClientProtocol):
         self.sendMessage(bin,isBinary = True)
 
     def onOpen(self):
-        print()
         self.sendHello()
         self.sendCode('6c01') #GET neue Cash Termine
         self.sendCode('6c01') #GET neue Cash Termine
         self.sendCode('3b01') #GET links für streams
-        self.sendCode('5d010801') #GET links für streams
+        self.sendCode('5d010801') #First Keep Alive Package
 
     def popAndCompare(self, a, b):
         compareBytes = bytearray(binascii.unhexlify(b))
@@ -102,66 +109,77 @@ class EchoClientProtocol(WebSocketClientProtocol):
     def parseQuest(self, payload):
         pl = bytearray(payload)
         if not self.popAndCompare(pl,'3D01'):
-            print("not a question")
-            print(payload)
-            exit()
+            logger.info("not a question")
+            logger.info(payload)
+            return
         questNR = 0
         if self.popAndCompare(pl,'08'):
             questNR = self.pop(pl,1)[0]
         else:
             questNR = 12
         if self.popAndCompare(pl,'10'):
-            print(pl)
+            logger.info(pl)
             self.pop(pl,5)
         else:
-            print("sth weird 1")
-            print(pl)
+            logger.info("no 0x10 byte")
+            logger.info(pl)
         if self.popAndCompare(pl,'2c'):
             self.pop(pl,2)
         else:
-            print("sth weird 2")
-            print(pl)
+            logger.info("no 0x2c byte")
+            logger.info(pl)
         self.popAndCompare(pl,'01')
         if self.popAndCompare(pl,'08'):
             self.pop(pl,2)
         else:
-            print("sth weird 3")
-            print(pl)
+            logger.info("no 0x08 byte")
+            logger.info(pl)
         if self.popAndCompare(pl,'12'):
             questLen = self.pop(pl,1)[0]
             quest = self.pop(pl,questLen).decode(encoding="utf-8")
         else:
-            print("sth weird 4")
-            print(payload)
+            logger.info("no questLength id 0x12")
+            logger.info(payload)
+            return
         if self.popAndCompare(pl,'1a'):
             ans1Len = self.pop(pl,1)[0]
             ans1 = self.pop(pl,ans1Len).decode(encoding="utf-8")
         else:
-            print("sth weird 5")
-            print(payload)
+            logger.info("sth weird 5")
+            logger.info(payload)
         if self.popAndCompare(pl,'1a'):
             ans2Len = self.pop(pl,1)[0]
             ans2 = self.pop(pl,ans2Len).decode(encoding="utf-8")
         else:
-            print("sth weird 6")
-            print(payload)
+            logger.info("sth weird 6")
+            logger.info(payload)
         if self.popAndCompare(pl,'1a'):
             ans3Len = self.pop(pl,1)[0]
             ans3 = self.pop(pl,ans3Len).decode(encoding="utf-8")
         else:
-            print("sth weird 7")
-            print(payload)
+            logger.info("sth weird 7")
+            logger.info(payload)
+        print("-----------------------")
+        print("-----------------------")
+        print(quest)
+        print("-----------------------")
+        print(ans1)
+        print(ans2)
+        print(ans3)
+        print("-----------------------")
+        print("-----------------------")
         openSearcher(quest,ans1,ans2,ans3)
 
     def onMessage(self, payload, isBinary):
-        print(payload)
+        logger.info("---------Package received-----------")
+        logger.info(binascii.hexlify(payload))
         if payload[0] is 61: # erhalten: Frage
             self.parseQuest(payload)            
 
         if (payload[0] is 94) and (len(payload) > 3): #erhalten: Keep Alive Packet
-            print("send keep alive:")
+            #print("send keep alive:")
             newKAPacket = (int.from_bytes(b'\x5d\x01\x08\x00','big')+payload[3]+1).to_bytes(4,byteorder ='big')
-            print(newKAPacket)
+            #print(newKAPacket)
             time.sleep(3)
             self.sendCode(binascii.hexlify(newKAPacket))
 
