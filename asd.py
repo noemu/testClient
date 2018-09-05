@@ -35,7 +35,7 @@ def openSearcher(frage,antwort1,antwort2,antwort3):
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
-    webInput = urllib.parse.quote_plus(frage+" "+antwort1+" "+antwort2+" "+antwort3)      
+    webInput = urllib.parse.quote_plus(frage)      
     url = "https://www.google.de/search?q=" + webInput
     hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -46,23 +46,31 @@ def openSearcher(frage,antwort1,antwort2,antwort3):
     #print(url)
     req = urllib.request.Request(url,None,hdr)
     response = urllib.request.urlopen(req,context=ctx).read().decode('utf-8')
-    responseHigh = response
-    #for wort in frage.split():
-        #responseHigh = responseHigh.replace(wort,'<mark>'+wort+'</mark>')
-    for wort in antwort1.split():
-        responseHigh = responseHigh.replace(wort,'<mark>'+wort+'</mark>')
-    for wort in antwort2.split():
-        responseHigh = responseHigh.replace(wort,'<mark>'+wort+'</mark>')
-    for wort in antwort3.split():
-        responseHigh = responseHigh.replace(wort,'<mark>'+wort+'</mark>')
-    file = open('high.html','w', encoding="utf8")
-    file.write(responseHigh)
-    file.close()    
-    urlFIle = 'file://' + os.path.realpath('high.html')
-    #if os.name == 'nt':
-        #webbrowser.get(using='windows-default').open(urlFIle,new=new)
-    #else:
-        #webbrowser.get(using='google-chrome').open(urlFIle,new=new)
+    #responseList = response.split()
+
+    counter1 = 0
+    for wordA in antwort1.split():
+        index = response.find(wordA)  
+        while(index is not -1):
+            counter1+=1
+            index = response.find(wordA,index+1)
+
+    counter2 = 0
+    for wordA in antwort2.split():
+        index = response.find(wordA)  
+        while(index is not -1):
+            counter2+=1
+            index = response.find(wordA,index+1)
+
+    counter3 = 0
+    for wordA in antwort3.split():
+        index = response.find(wordA)  
+        while(index is not -1):
+            counter3+=1
+            index = response.find(wordA,index+1)
+    print(antwort1+" : "+str(100.0*counter1/(counter1+counter2+counter3+1))+"%")
+    print(antwort2+" : "+str(100.0*counter2/(counter1+counter2+counter3+1))+"%")
+    print(antwort3+" : "+str(100.0*counter3/(counter1+counter2+counter3+1))+"%")
 
 
 class EchoClientProtocol(WebSocketClientProtocol):
@@ -165,11 +173,7 @@ class EchoClientProtocol(WebSocketClientProtocol):
         print("-----------------------")
         print(quest)
         print("-----------------------")
-        print(ans1)
-        print(ans2)
-        print(ans3)
-        print("-----------------------")
-        print("-----------------------")
+
         openSearcher(quest,ans1,ans2,ans3)
 
     def onMessage(self, payload, isBinary):
@@ -219,9 +223,23 @@ if __name__ == '__main__':
 
     factory.protocol = EchoClientProtocol
 
-    #amd = EchoClientProtocol()
-    #amd.onMessage(binascii.unhexlify('3d01080a10b8aec1a0da2c1a8d01088d321249556e7465722077656c6368657220506c617474656e6669726d612077757264652064617320416c62756d2022507572706c65205261696e2220766572c3b66666656e746c696368743f1a10436f6c756d626961205265636f7264731a145761726e65722042726f732e205265636f7264731a15556e6976657273616c204d757369632047726f757028b0ea0130b4f34c38f8ecc1a0da2c'),True)
-    #exit()  
+    amd = EchoClientProtocol()
+    amd.onMessage(binascii.unhexlify('3d01080a10b8aec1a0da2c1a8d01088d321249556e7465722077656c6368657220506c617474656e6669726d612077757264652064617320416c62756d2022507572706c65205261696e2220766572c3b66666656e746c696368743f1a10436f6c756d626961205265636f7264731a145761726e65722042726f732e205265636f7264731a15556e6976657273616c204d757369632047726f757028b0ea0130b4f34c38f8ecc1a0da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d0110d0bebbc9da2c1a33089b321222576965207669656c65205374756e64656e20686162656e207a77656920546167653f1a0232341a0234381a023732200130ded02c3890fdbbc9da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d0108011088cdbec9da2c1a33089c32121745696e205066657264206861742076696572202e2e2e3f1a0441726d651a0853636877656966651a054265696e6530c6df2f38c88bbfc9da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d01080310f8e9c4c9da2c1a3c089e321222576f20777572646520646572202254726162616e74222070726f64757a696572743f1a034444521a034252441a0944c3a46e656d61726b30eefa3538b8a8c5c9da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d01080410f0b6c8c9da2c1a73089f32124e496e2077656c6368656d204c616e642064657220457264652077757264656e20646965206772c3b6c39f74656e2054656d70657261747572756e746572736368696564652067656d657373656e3f1a0b446575747363686c616e641a075370616e69656e1a08527573736c616e643086c83938b0f5c8c9da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d0108051080f9ccc9da2c1a6808a032124d45696e20506c616e657420756e736572657320536f6e6e656e73797374656d732065726c6974742065696e6520537461747573c3a46e646572756e672c2077656c63686572207761722065733f1a05506c75746f1a074a7570697465721a044d61727328904e30ce893e38c0b7cdc9da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d01080610c8d8cfc9da2c1a890108a13212504d6172696c796e204d6f6e726f65202d20776572206b656e6e7420736965206e696368742120446f6368207765722077617220696872652064657574736368652053796e6368726f6e7374696d6d653f1a0f4d6172676f74204c656f6e686172641a1042726967697474652047726f7468756d1a0f53696d6f6e6520427261686d616e6e28a09c013086e940388897d0c9da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d01080710e0c7d2c9da2c1a4e08a2321231496e2077656c636865722048c3b668652068c3a46e677420646572204b6f7262206265696d204261736b657462616c6c3f1a06332c3230206d1a06332c3035206d1a06322c3830206d28904e309dd44338a086d3c9da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d0108081080ded5c9da2c1a6f08a3321257576965207669656c65205374656c6c656e207a7769736368656e204b6f706620756e642057697262656c73c3a4756c6520646573204d656e736368656e20686162656e206b65696e652042616e64736368656962656e3f1a044e756c6c1a0546c3bc6e661a045a77656928a09c0130beea4638c09cd6c9da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d01080910f083d9c9da2c1a7c08a43212514d6f727068696e2069737420616c73205363686d65727a6d697474656c2062656b616e6e742c20646f6368206175732077656c636865722050666c616e7a652077697264206573206765776f6e6e656e3f1a0b48616e6670666c616e7a651a0a5363686c61666d6f686e1a0b466c696567656e70696c7a28a09c0130cd964a38b0c2d9c9da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d01080a10a0ebdbc9da2c1a870108a532125957656c636865722064657220666f6c67656e64656e204265677269666665207769726420696e204672c3bc687761726e73797374656d652066c3bc72204572642d20756e6420536565626562656e2076657277656e6465743f1a0b536569736d6f67726170681a0b54656e73696f6d657465721a0d4765696765727ac3a4686c657228b0ea0130adfd4c38e0a9dcc9da2c'),True)
+    amd.onMessage(binascii.unhexlify('3d01080b10908be1c9da2c1a830108a632124d57656c63686520506572736f6e20776172206e6965205072c3a4736964656e74206f646572205072c3a4736964656e74696e206465732044657574736368656e2042756e646573746167733f201a0e526974612053c3bc73736d7574681a0e48656c6d7574205363686d6964741a0f4e6f7262657274204c616d6d6572742898fc0630e59d5238d0c9e1c9da2c'),True)
+
+
+
+    exit()  
     connectWS(factory)
 
     reactor.run()
