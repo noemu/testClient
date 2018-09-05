@@ -7088,3 +7088,106 @@ bytearray(b'\xa0\xeb\xdb\xc9\xda,\x1a\x87\x01\x08\xa52\x12YWelcher der folgenden
 b'3d01080b10908be1c9da2c1a830108a632124d57656c63686520506572736f6e20776172206e6965205072c3a4736964656e74206f646572205072c3a4736964656e74696e206465732044657574736368656e2042756e646573746167733f201a0e526974612053c3bc73736d7574681a0e48656c6d7574205363686d6964741a0f4e6f7262657274204c616d6d6572742898fc0630e59d5238d0c9e1c9da2c'
 ----Frage erhalten----
 bytearray(b'\x90\x8b\xe1\xc9\xda,\x1a\x83\x01\x08\xa62\x12MWelche Person war nie Pr\xc3\xa4sident oder Pr\xc3\xa4sidentin des Deutschen Bundestags? \x1a\x0eRita S\xc3\xbcssmuth\x1a\x0eHelmut Schmidt\x1a\x0fNorbert Lammert(\x98\xfc\x060\xe5\x9dR8\xd0\xc9\xe1\xc9\xda,')
+---------start session----------
+---------Package received-----------
+b'3d01080a10b8aec1a0da2c1a8d01088d321249556e7465722077656c6368657220506c617474656e6669726d612077757264652064617320416c62756d2022507572706c65205261696e2220766572c3b66666656e746c696368743f1a10436f6c756d626961205265636f7264731a145761726e65722042726f732e205265636f7264731a15556e6976657273616c204d757369632047726f757028b0ea0130b4f34c38f8ecc1a0da2c'
+----Frage erhalten----
+bytearray(b'\xb8\xae\xc1\xa0\xda,\x1a\x8d\x01\x08\x8d2\x12IUnter welcher Plattenfirma wurde das Album "Purple Rain" ver\xc3\xb6ffentlicht?\x1a\x10Columbia Records\x1a\x14Warner Bros. Records\x1a\x15Universal Music Group(\xb0\xea\x010\xb4\xf3L8\xf8\xec\xc1\xa0\xda,')
+---------start session----------
+---------Package received-----------
+b'3d01080a10b8aec1a0da2c1a8d01088d321249556e7465722077656c6368657220506c617474656e6669726d612077757264652064617320416c62756d2022507572706c65205261696e2220766572c3b66666656e746c696368743f1a10436f6c756d626961205265636f7264731a145761726e65722042726f732e205265636f7264731a15556e6976657273616c204d757369632047726f757028b0ea0130b4f34c38f8ecc1a0da2c'
+----Frage erhalten----
+bytearray(b'\xb8\xae\xc1\xa0\xda,\x1a\x8d\x01\x08\x8d2\x12IUnter welcher Plattenfirma wurde das Album "Purple Rain" ver\xc3\xb6ffentlicht?\x1a\x10Columbia Records\x1a\x14Warner Bros. Records\x1a\x15Universal Music Group(\xb0\xea\x010\xb4\xf3L8\xf8\xec\xc1\xa0\xda,')
+---------Package received-----------
+b'3d0110d0bebbc9da2c1a33089b321222576965207669656c65205374756e64656e20686162656e207a77656920546167653f1a0232341a0234381a023732200130ded02c3890fdbbc9da2c'
+----Frage erhalten----
+bytearray(b'\xd0\xbe\xbb\xc9\xda,\x1a3\x08\x9b2\x12"Wie viele Stunden haben zwei Tage?\x1a\x0224\x1a\x0248\x1a\x0272 \x010\xde\xd0,8\x90\xfd\xbb\xc9\xda,')
+---------Package received-----------
+b'3d0108011088cdbec9da2c1a33089c32121745696e205066657264206861742076696572202e2e2e3f1a0441726d651a0853636877656966651a054265696e6530c6df2f38c88bbfc9da2c'
+----Frage erhalten----
+bytearray(b'\x88\xcd\xbe\xc9\xda,\x1a3\x08\x9c2\x12\x17Ein Pferd hat vier ...?\x1a\x04Arme\x1a\x08Schweife\x1a\x05Beine0\xc6\xdf/8\xc8\x8b\xbf\xc9\xda,')
+---------Package received-----------
+b'3d01080310f8e9c4c9da2c1a3c089e321222576f20777572646520646572202254726162616e74222070726f64757a696572743f1a034444521a034252441a0944c3a46e656d61726b30eefa3538b8a8c5c9da2c'
+----Frage erhalten----
+bytearray(b'\xf8\xe9\xc4\xc9\xda,\x1a<\x08\x9e2\x12"Wo wurde der "Trabant" produziert?\x1a\x03DDR\x1a\x03BRD\x1a\tD\xc3\xa4nemark0\xee\xfa58\xb8\xa8\xc5\xc9\xda,')
+---------Package received-----------
+b'3d01080410f0b6c8c9da2c1a73089f32124e496e2077656c6368656d204c616e642064657220457264652077757264656e20646965206772c3b6c39f74656e2054656d70657261747572756e746572736368696564652067656d657373656e3f1a0b446575747363686c616e641a075370616e69656e1a08527573736c616e643086c83938b0f5c8c9da2c'
+----Frage erhalten----
+bytearray(b'\xf0\xb6\xc8\xc9\xda,\x1as\x08\x9f2\x12NIn welchem Land der Erde wurden die gr\xc3\xb6\xc3\x9ften Temperaturunterschiede gemessen?\x1a\x0bDeutschland\x1a\x07Spanien\x1a\x08Russland0\x86\xc898\xb0\xf5\xc8\xc9\xda,')
+---------Package received-----------
+b'3d0108051080f9ccc9da2c1a6808a032124d45696e20506c616e657420756e736572657320536f6e6e656e73797374656d732065726c6974742065696e6520537461747573c3a46e646572756e672c2077656c63686572207761722065733f1a05506c75746f1a074a7570697465721a044d61727328904e30ce893e38c0b7cdc9da2c'
+----Frage erhalten----
+bytearray(b'\x80\xf9\xcc\xc9\xda,\x1ah\x08\xa02\x12MEin Planet unseres Sonnensystems erlitt eine Status\xc3\xa4nderung, welcher war es?\x1a\x05Pluto\x1a\x07Jupiter\x1a\x04Mars(\x90N0\xce\x89>8\xc0\xb7\xcd\xc9\xda,')
+---------Package received-----------
+b'3d01080610c8d8cfc9da2c1a890108a13212504d6172696c796e204d6f6e726f65202d20776572206b656e6e7420736965206e696368742120446f6368207765722077617220696872652064657574736368652053796e6368726f6e7374696d6d653f1a0f4d6172676f74204c656f6e686172641a1042726967697474652047726f7468756d1a0f53696d6f6e6520427261686d616e6e28a09c013086e940388897d0c9da2c'
+----Frage erhalten----
+bytearray(b'\xc8\xd8\xcf\xc9\xda,\x1a\x89\x01\x08\xa12\x12PMarilyn Monroe - wer kennt sie nicht! Doch wer war ihre deutsche Synchronstimme?\x1a\x0fMargot Leonhard\x1a\x10Brigitte Grothum\x1a\x0fSimone Brahmann(\xa0\x9c\x010\x86\xe9@8\x88\x97\xd0\xc9\xda,')
+---------Package received-----------
+b'3d01080710e0c7d2c9da2c1a4e08a2321231496e2077656c636865722048c3b668652068c3a46e677420646572204b6f7262206265696d204261736b657462616c6c3f1a06332c3230206d1a06332c3035206d1a06322c3830206d28904e309dd44338a086d3c9da2c'
+----Frage erhalten----
+bytearray(b'\xe0\xc7\xd2\xc9\xda,\x1aN\x08\xa22\x121In welcher H\xc3\xb6he h\xc3\xa4ngt der Korb beim Basketball?\x1a\x063,20 m\x1a\x063,05 m\x1a\x062,80 m(\x90N0\x9d\xd4C8\xa0\x86\xd3\xc9\xda,')
+---------Package received-----------
+b'3d0108081080ded5c9da2c1a6f08a3321257576965207669656c65205374656c6c656e207a7769736368656e204b6f706620756e642057697262656c73c3a4756c6520646573204d656e736368656e20686162656e206b65696e652042616e64736368656962656e3f1a044e756c6c1a0546c3bc6e661a045a77656928a09c0130beea4638c09cd6c9da2c'
+----Frage erhalten----
+bytearray(b'\x80\xde\xd5\xc9\xda,\x1ao\x08\xa32\x12WWie viele Stellen zwischen Kopf und Wirbels\xc3\xa4ule des Menschen haben keine Bandscheiben?\x1a\x04Null\x1a\x05F\xc3\xbcnf\x1a\x04Zwei(\xa0\x9c\x010\xbe\xeaF8\xc0\x9c\xd6\xc9\xda,')
+---------Package received-----------
+b'3d01080910f083d9c9da2c1a7c08a43212514d6f727068696e2069737420616c73205363686d65727a6d697474656c2062656b616e6e742c20646f6368206175732077656c636865722050666c616e7a652077697264206573206765776f6e6e656e3f1a0b48616e6670666c616e7a651a0a5363686c61666d6f686e1a0b466c696567656e70696c7a28a09c0130cd964a38b0c2d9c9da2c'
+----Frage erhalten----
+bytearray(b'\xf0\x83\xd9\xc9\xda,\x1a|\x08\xa42\x12QMorphin ist als Schmerzmittel bekannt, doch aus welcher Pflanze wird es gewonnen?\x1a\x0bHanfpflanze\x1a\nSchlafmohn\x1a\x0bFliegenpilz(\xa0\x9c\x010\xcd\x96J8\xb0\xc2\xd9\xc9\xda,')
+---------Package received-----------
+b'3d01080a10a0ebdbc9da2c1a870108a532125957656c636865722064657220666f6c67656e64656e204265677269666665207769726420696e204672c3bc687761726e73797374656d652066c3bc72204572642d20756e6420536565626562656e2076657277656e6465743f1a0b536569736d6f67726170681a0b54656e73696f6d657465721a0d4765696765727ac3a4686c657228b0ea0130adfd4c38e0a9dcc9da2c'
+----Frage erhalten----
+bytearray(b'\xa0\xeb\xdb\xc9\xda,\x1a\x87\x01\x08\xa52\x12YWelcher der folgenden Begriffe wird in Fr\xc3\xbchwarnsysteme f\xc3\xbcr Erd- und Seebeben verwendet?\x1a\x0bSeismograph\x1a\x0bTensiometer\x1a\rGeigerz\xc3\xa4hler(\xb0\xea\x010\xad\xfdL8\xe0\xa9\xdc\xc9\xda,')
+---------Package received-----------
+b'3d01080b10908be1c9da2c1a830108a632124d57656c63686520506572736f6e20776172206e6965205072c3a4736964656e74206f646572205072c3a4736964656e74696e206465732044657574736368656e2042756e646573746167733f201a0e526974612053c3bc73736d7574681a0e48656c6d7574205363686d6964741a0f4e6f7262657274204c616d6d6572742898fc0630e59d5238d0c9e1c9da2c'
+----Frage erhalten----
+bytearray(b'\x90\x8b\xe1\xc9\xda,\x1a\x83\x01\x08\xa62\x12MWelche Person war nie Pr\xc3\xa4sident oder Pr\xc3\xa4sidentin des Deutschen Bundestags? \x1a\x0eRita S\xc3\xbcssmuth\x1a\x0eHelmut Schmidt\x1a\x0fNorbert Lammert(\x98\xfc\x060\xe5\x9dR8\xd0\xc9\xe1\xc9\xda,')
+---------start session----------
+---------Package received-----------
+b'3d01080a10b8aec1a0da2c1a8d01088d321249556e7465722077656c6368657220506c617474656e6669726d612077757264652064617320416c62756d2022507572706c65205261696e2220766572c3b66666656e746c696368743f1a10436f6c756d626961205265636f7264731a145761726e65722042726f732e205265636f7264731a15556e6976657273616c204d757369632047726f757028b0ea0130b4f34c38f8ecc1a0da2c'
+----Frage erhalten----
+bytearray(b'\xb8\xae\xc1\xa0\xda,\x1a\x8d\x01\x08\x8d2\x12IUnter welcher Plattenfirma wurde das Album "Purple Rain" ver\xc3\xb6ffentlicht?\x1a\x10Columbia Records\x1a\x14Warner Bros. Records\x1a\x15Universal Music Group(\xb0\xea\x010\xb4\xf3L8\xf8\xec\xc1\xa0\xda,')
+---------Package received-----------
+b'3d0110d0bebbc9da2c1a33089b321222576965207669656c65205374756e64656e20686162656e207a77656920546167653f1a0232341a0234381a023732200130ded02c3890fdbbc9da2c'
+----Frage erhalten----
+bytearray(b'\xd0\xbe\xbb\xc9\xda,\x1a3\x08\x9b2\x12"Wie viele Stunden haben zwei Tage?\x1a\x0224\x1a\x0248\x1a\x0272 \x010\xde\xd0,8\x90\xfd\xbb\xc9\xda,')
+---------Package received-----------
+b'3d0108011088cdbec9da2c1a33089c32121745696e205066657264206861742076696572202e2e2e3f1a0441726d651a0853636877656966651a054265696e6530c6df2f38c88bbfc9da2c'
+----Frage erhalten----
+bytearray(b'\x88\xcd\xbe\xc9\xda,\x1a3\x08\x9c2\x12\x17Ein Pferd hat vier ...?\x1a\x04Arme\x1a\x08Schweife\x1a\x05Beine0\xc6\xdf/8\xc8\x8b\xbf\xc9\xda,')
+---------Package received-----------
+b'3d01080310f8e9c4c9da2c1a3c089e321222576f20777572646520646572202254726162616e74222070726f64757a696572743f1a034444521a034252441a0944c3a46e656d61726b30eefa3538b8a8c5c9da2c'
+----Frage erhalten----
+bytearray(b'\xf8\xe9\xc4\xc9\xda,\x1a<\x08\x9e2\x12"Wo wurde der "Trabant" produziert?\x1a\x03DDR\x1a\x03BRD\x1a\tD\xc3\xa4nemark0\xee\xfa58\xb8\xa8\xc5\xc9\xda,')
+---------Package received-----------
+b'3d01080410f0b6c8c9da2c1a73089f32124e496e2077656c6368656d204c616e642064657220457264652077757264656e20646965206772c3b6c39f74656e2054656d70657261747572756e746572736368696564652067656d657373656e3f1a0b446575747363686c616e641a075370616e69656e1a08527573736c616e643086c83938b0f5c8c9da2c'
+----Frage erhalten----
+bytearray(b'\xf0\xb6\xc8\xc9\xda,\x1as\x08\x9f2\x12NIn welchem Land der Erde wurden die gr\xc3\xb6\xc3\x9ften Temperaturunterschiede gemessen?\x1a\x0bDeutschland\x1a\x07Spanien\x1a\x08Russland0\x86\xc898\xb0\xf5\xc8\xc9\xda,')
+---------Package received-----------
+b'3d0108051080f9ccc9da2c1a6808a032124d45696e20506c616e657420756e736572657320536f6e6e656e73797374656d732065726c6974742065696e6520537461747573c3a46e646572756e672c2077656c63686572207761722065733f1a05506c75746f1a074a7570697465721a044d61727328904e30ce893e38c0b7cdc9da2c'
+----Frage erhalten----
+bytearray(b'\x80\xf9\xcc\xc9\xda,\x1ah\x08\xa02\x12MEin Planet unseres Sonnensystems erlitt eine Status\xc3\xa4nderung, welcher war es?\x1a\x05Pluto\x1a\x07Jupiter\x1a\x04Mars(\x90N0\xce\x89>8\xc0\xb7\xcd\xc9\xda,')
+---------Package received-----------
+b'3d01080610c8d8cfc9da2c1a890108a13212504d6172696c796e204d6f6e726f65202d20776572206b656e6e7420736965206e696368742120446f6368207765722077617220696872652064657574736368652053796e6368726f6e7374696d6d653f1a0f4d6172676f74204c656f6e686172641a1042726967697474652047726f7468756d1a0f53696d6f6e6520427261686d616e6e28a09c013086e940388897d0c9da2c'
+----Frage erhalten----
+bytearray(b'\xc8\xd8\xcf\xc9\xda,\x1a\x89\x01\x08\xa12\x12PMarilyn Monroe - wer kennt sie nicht! Doch wer war ihre deutsche Synchronstimme?\x1a\x0fMargot Leonhard\x1a\x10Brigitte Grothum\x1a\x0fSimone Brahmann(\xa0\x9c\x010\x86\xe9@8\x88\x97\xd0\xc9\xda,')
+---------Package received-----------
+b'3d01080710e0c7d2c9da2c1a4e08a2321231496e2077656c636865722048c3b668652068c3a46e677420646572204b6f7262206265696d204261736b657462616c6c3f1a06332c3230206d1a06332c3035206d1a06322c3830206d28904e309dd44338a086d3c9da2c'
+----Frage erhalten----
+bytearray(b'\xe0\xc7\xd2\xc9\xda,\x1aN\x08\xa22\x121In welcher H\xc3\xb6he h\xc3\xa4ngt der Korb beim Basketball?\x1a\x063,20 m\x1a\x063,05 m\x1a\x062,80 m(\x90N0\x9d\xd4C8\xa0\x86\xd3\xc9\xda,')
+---------Package received-----------
+b'3d0108081080ded5c9da2c1a6f08a3321257576965207669656c65205374656c6c656e207a7769736368656e204b6f706620756e642057697262656c73c3a4756c6520646573204d656e736368656e20686162656e206b65696e652042616e64736368656962656e3f1a044e756c6c1a0546c3bc6e661a045a77656928a09c0130beea4638c09cd6c9da2c'
+----Frage erhalten----
+bytearray(b'\x80\xde\xd5\xc9\xda,\x1ao\x08\xa32\x12WWie viele Stellen zwischen Kopf und Wirbels\xc3\xa4ule des Menschen haben keine Bandscheiben?\x1a\x04Null\x1a\x05F\xc3\xbcnf\x1a\x04Zwei(\xa0\x9c\x010\xbe\xeaF8\xc0\x9c\xd6\xc9\xda,')
+---------Package received-----------
+b'3d01080910f083d9c9da2c1a7c08a43212514d6f727068696e2069737420616c73205363686d65727a6d697474656c2062656b616e6e742c20646f6368206175732077656c636865722050666c616e7a652077697264206573206765776f6e6e656e3f1a0b48616e6670666c616e7a651a0a5363686c61666d6f686e1a0b466c696567656e70696c7a28a09c0130cd964a38b0c2d9c9da2c'
+----Frage erhalten----
+bytearray(b'\xf0\x83\xd9\xc9\xda,\x1a|\x08\xa42\x12QMorphin ist als Schmerzmittel bekannt, doch aus welcher Pflanze wird es gewonnen?\x1a\x0bHanfpflanze\x1a\nSchlafmohn\x1a\x0bFliegenpilz(\xa0\x9c\x010\xcd\x96J8\xb0\xc2\xd9\xc9\xda,')
+---------Package received-----------
+b'3d01080a10a0ebdbc9da2c1a870108a532125957656c636865722064657220666f6c67656e64656e204265677269666665207769726420696e204672c3bc687761726e73797374656d652066c3bc72204572642d20756e6420536565626562656e2076657277656e6465743f1a0b536569736d6f67726170681a0b54656e73696f6d657465721a0d4765696765727ac3a4686c657228b0ea0130adfd4c38e0a9dcc9da2c'
+----Frage erhalten----
+bytearray(b'\xa0\xeb\xdb\xc9\xda,\x1a\x87\x01\x08\xa52\x12YWelcher der folgenden Begriffe wird in Fr\xc3\xbchwarnsysteme f\xc3\xbcr Erd- und Seebeben verwendet?\x1a\x0bSeismograph\x1a\x0bTensiometer\x1a\rGeigerz\xc3\xa4hler(\xb0\xea\x010\xad\xfdL8\xe0\xa9\xdc\xc9\xda,')
+---------Package received-----------
+b'3d01080b10908be1c9da2c1a830108a632124d57656c63686520506572736f6e20776172206e6965205072c3a4736964656e74206f646572205072c3a4736964656e74696e206465732044657574736368656e2042756e646573746167733f201a0e526974612053c3bc73736d7574681a0e48656c6d7574205363686d6964741a0f4e6f7262657274204c616d6d6572742898fc0630e59d5238d0c9e1c9da2c'
+----Frage erhalten----
+bytearray(b'\x90\x8b\xe1\xc9\xda,\x1a\x83\x01\x08\xa62\x12MWelche Person war nie Pr\xc3\xa4sident oder Pr\xc3\xa4sidentin des Deutschen Bundestags? \x1a\x0eRita S\xc3\xbcssmuth\x1a\x0eHelmut Schmidt\x1a\x0fNorbert Lammert(\x98\xfc\x060\xe5\x9dR8\xd0\xc9\xe1\xc9\xda,')

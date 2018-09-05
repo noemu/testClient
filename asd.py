@@ -22,6 +22,16 @@ logger = logging.getLogger('testClient')
 logger.setLevel(logging.INFO)
 logger.addHandler(fh)
 
+def countWords(text,words):
+    counter1 = 0
+    for wordA in words.split():
+        index = text.find(wordA)  
+        while(index is not -1):
+            counter1+=1
+            index = text.find(wordA,index+1)
+    return counter1
+
+
 def openSearcher(frage,antwort1,antwort2,antwort3):
     new=2
     if os.name == 'nt':
@@ -43,34 +53,44 @@ def openSearcher(frage,antwort1,antwort2,antwort3):
        'Accept-Encoding': 'none',
        'Accept-Language': 'en-US,en;q=0.8',
        'Connection': 'keep-alive'}
-    #print(url)
     req = urllib.request.Request(url,None,hdr)
     response = urllib.request.urlopen(req,context=ctx).read().decode('utf-8')
-    #responseList = response.split()
 
-    counter1 = 0
-    for wordA in antwort1.split():
-        index = response.find(wordA)  
-        while(index is not -1):
-            counter1+=1
-            index = response.find(wordA,index+1)
+    counter1 = countWords(response,antwort1)
+    counter2 = countWords(response,antwort2)
+    counter3 = countWords(response,antwort3)
+  
+    webInput = urllib.parse.quote_plus(antwort1)
+    url = "https://www.google.de/search?q=" + webInput
+    req = urllib.request.Request(url,None,hdr)
+    response = urllib.request.urlopen(req,context=ctx).read().decode('utf-8')
+    counterQ1=countWords(response,frage)
 
-    counter2 = 0
-    for wordA in antwort2.split():
-        index = response.find(wordA)  
-        while(index is not -1):
-            counter2+=1
-            index = response.find(wordA,index+1)
+    webInput = urllib.parse.quote_plus(antwort2)
+    url = "https://www.google.de/search?q=" + webInput
+    req = urllib.request.Request(url,None,hdr)
+    response = urllib.request.urlopen(req,context=ctx).read().decode('utf-8')
+    counterQ2=countWords(response,frage)
 
-    counter3 = 0
-    for wordA in antwort3.split():
-        index = response.find(wordA)  
-        while(index is not -1):
-            counter3+=1
-            index = response.find(wordA,index+1)
+    webInput = urllib.parse.quote_plus(antwort3)
+    url = "https://www.google.de/search?q=" + webInput
+    req = urllib.request.Request(url,None,hdr)
+    response = urllib.request.urlopen(req,context=ctx).read().decode('utf-8')
+    counterQ3=countWords(response,frage)
+
+    minCounterQ = min(counterQ1,counterQ2,counterQ3)
+    counterQ1-=minCounterQ
+    counterQ2-=minCounterQ
+    counterQ3-=minCounterQ
+
+    print("----answer in question-----")
     print(antwort1+" : "+str(100.0*counter1/(counter1+counter2+counter3+1))+"%")
     print(antwort2+" : "+str(100.0*counter2/(counter1+counter2+counter3+1))+"%")
     print(antwort3+" : "+str(100.0*counter3/(counter1+counter2+counter3+1))+"%")
+    print("----question in answer-----")
+    print(antwort1+" : "+str(100.0*counterQ1/(counterQ1+counterQ2+counterQ3+1))+"%")
+    print(antwort2+" : "+str(100.0*counterQ2/(counterQ1+counterQ2+counterQ3+1))+"%")
+    print(antwort3+" : "+str(100.0*counterQ3/(counterQ1+counterQ2+counterQ3+1))+"%")
 
 
 class EchoClientProtocol(WebSocketClientProtocol):
