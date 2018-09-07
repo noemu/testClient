@@ -14,7 +14,7 @@ import threading
 import numpy as np
 import matplotlib.pyplot as plt
 
-from twisted.internet import reactor
+from twisted.internet import reactor,threads
 from twisted.python import log
 from twisted.internet.protocol import ReconnectingClientFactory
 
@@ -202,21 +202,25 @@ class selector():
 class websocketThread(threading.Thread):
 
     def __init__(self,questChange):
-        threading.Thread.__init__(self)
         self.questChange = questChange
-        self.start()
-
-    def run(self):
         headers = {'Origin': 'http://live-de-prod-eb.tuanguwen.com:80','Sec-WebSocket-Protocol':'default-protocol','Sec-WebSocket-Extensions':''}
         self.factory = MyClientFactory('ws://live-de-prod-eb.tuanguwen.com:80', headers=headers)
 
-        self.factory.protocol = EchoClientProtocol(self.questChange)
+        self.factory.protocol = EchoClientProtocol
+        threading.Thread.__init__(self)
 
-        self.test()
+        d = threads.deferToThread(self.factory.protocol.parseQuest)
+        d.addCallback(self.pr)
 
+        self.start()
+
+    def run(self):        
         connectWS(self.factory)
-
         reactor.run()
+
+    def pr(x):
+        print(x)
+
     def test(self):
         amd = self.factory.protocol
         amd.onMessage(binascii.unhexlify('3d01080a10b8aec1a0da2c1a8d01088d321249556e7465722077656c6368657220506c617474656e6669726d612077757264652064617320416c62756d2022507572706c65205261696e2220766572c3b66666656e746c696368743f1a10436f6c756d626961205265636f7264731a145761726e65722042726f732e205265636f7264731a15556e6976657273616c204d757369632047726f757028b0ea0130b4f34c38f8ecc1a0da2c'),True)
@@ -260,9 +264,10 @@ class MyClientFactory(WebSocketClientFactory, ReconnectingClientFactory):
         self.retry(connector)
 
 class EchoClientProtocol(WebSocketClientProtocol):
-    def __init__(self,questChange):
+    def __init__(self):
+        #self.questChange = questChange
         WebSocketClientProtocol.__init__(self)
-        self.questChange = questChange
+        
     
     def onConnect(self, response):
         logger.info("--------onConnect:Response----------")
@@ -363,7 +368,9 @@ class EchoClientProtocol(WebSocketClientProtocol):
         print(quest)
         print("-----------------------")
 
-        self.questChange(quest,ans1,ans2,ans3)
+        return "it worked"
+
+        #self.questChange(quest,ans1,ans2,ans3)
 
     def onMessage(self, payload, isBinary):
         logger.info("---------Package received-----------")
